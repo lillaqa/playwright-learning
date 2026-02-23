@@ -30,7 +30,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
     baseURL: 'https://practicesoftwaretesting.com',
-
+    testIdAttribute: "data-test",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     actionTimeout: 0,
@@ -55,7 +55,7 @@ export default defineConfig({
     {
       name: 'firefox',
       dependencies: ['setup'],
-      use: { ...devices['Desktop Firefox'], permissions: ['clipboard-read'] },
+      use: { ...devices['Desktop Firefox'] },
     },
 
     // {
