@@ -4,6 +4,14 @@ test.describe('Home page without authentication', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('https://practicesoftwaretesting.com/');
     });
+
+    test("visual test no auth", async ({ page }) => {
+        await page.waitForLoadState('networkidle');
+        await expect(page).toHaveScreenshot('home-page-no-auth.png', {
+            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+        });
+
+    });
     test("Validate sign in", async ({ page }) => {
             await expect(page.getByTestId('nav-sign-in')).toHaveText('Sign in');
     });
@@ -33,6 +41,10 @@ test.describe('Home page with authentication', () => {
     
     test.beforeEach(async ({ page }) => {
         await page.goto('https://practicesoftwaretesting.com/');
+    });
+
+    test("visual test", async ({ page }) => {
+        await expect(page).toHaveScreenshot('home-page-with-auth.png');
     });
 
     test("Check that customer is signed in", async ({ page }) => {
