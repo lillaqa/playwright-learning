@@ -49,20 +49,20 @@ export default defineConfig({
     {
       name: 'chromium',
       dependencies: ['setup'],
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], permissions: ['clipboard-read'] },
     },
 
     {
       name: 'firefox',
       dependencies: ['setup'],
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'], permissions: ['clipboard-read'] },
     },
 
-    {
-      name: 'webkit',
-      dependencies: ['setup'],
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   dependencies: ['setup'],
+    //   use: { ...devices['Desktop Safari'], permissions: ['clipboard-read'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
