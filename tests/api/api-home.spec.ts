@@ -1,5 +1,4 @@
 import {test, expect} from '@playwright/test';
-import { request } from 'https';
 
 test.describe('GET Categories', () => {
     test('GET /categories - without authentication', async ({ request }) => {
@@ -22,5 +21,14 @@ test.describe('GET Categories', () => {
         expect(responseBody).toBeInstanceOf(Array);
         expect(responseBody.length).toBeGreaterThan(0);
     });
-});
 
+    test('GET empty category by search', async ({ request }) => {
+        const apiURL = 'https://api.practicesoftwaretesting.com';
+        const response = await request.get(apiURL + '/categories/search?q=special');
+        const responseBody = await response.json();
+
+        expect(response.status()).toBe(200);
+        expect(responseBody).toBeInstanceOf(Array);
+        expect(responseBody.length).toBe(0);
+    });
+});
