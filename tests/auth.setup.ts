@@ -25,7 +25,7 @@ setup("Create customer nr. 2", async ({ page, context }) => {
     await page.getByTestId("login-submit").click();
 
     await expect(page.getByTestId("nav-menu")).toContainText("Jack Howe");
-    await context.storageState({ path: customer1Auth });
+    await context.storageState({ path: customer2Auth });
 });
 
 setup("Create customer nr. 3", async ({ page, context }) => {
@@ -39,5 +39,5 @@ setup("Create customer nr. 3", async ({ page, context }) => {
     await page.getByTestId("login-submit").click();
 
     await expect(page.getByTestId("nav-menu")).toContainText("Bob Smith");
-    await context.storageState({ path: customer1Auth });
+    await context.storageState({ path: customer3Auth });
 });
