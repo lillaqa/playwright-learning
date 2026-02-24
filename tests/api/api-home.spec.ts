@@ -32,3 +32,15 @@ test.describe('GET Categories', () => {
         expect(responseBody.length).toBe(0);
     });
 });
+
+test.describe('GET all brands', () => {
+    test('GET /brands', async ({ request }) => {
+        const apiURL = 'https://api.practicesoftwaretesting.com';
+        const response = await request.get(apiURL + '/brands');
+        const responseBody = await response.json();
+
+        expect(response.status()).toBe(200);
+        expect(responseBody).toBeInstanceOf(Array);
+        expect(responseBody.length).toBeGreaterThan(0);
+    });
+});
