@@ -17,7 +17,7 @@ setup("Create customer nr. 1", async ({ page, context }) => {
 setup("Create customer nr. 2", async ({ page, context }) => {
     const email = "customer2@practicesoftwaretesting.com";
     const password = "welcome01";
-    const customer1Auth = ".auth/customer2.json";
+    const customer2Auth = ".auth/customer2.json";
 
     await page.goto("https://practicesoftwaretesting.com/auth/login");
     await page.getByTestId("email").fill(email);
@@ -31,7 +31,7 @@ setup("Create customer nr. 2", async ({ page, context }) => {
 setup("Create customer nr. 3", async ({ page, context }) => {
     const email = "customer3@practicesoftwaretesting.com";
     const password = "pass123";
-    const customer1Auth = ".auth/customer3.json";
+    const customer3Auth = ".auth/customer3.json";
 
     await page.goto("https://practicesoftwaretesting.com/auth/login");
     await page.getByTestId("email").fill(email);
