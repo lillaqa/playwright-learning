@@ -48,5 +48,38 @@ test.describe('Test mandatory fields', () => {
   });
 });
 
+//WIP dropdown option tests, main issue is the locator of the dropdown list and  validating the new text
 // test.describe('Test Subject dropdown', () => {
+//   test.beforeEach(async ({ page }) => {
+//   await page.goto('https://practicesoftwaretesting.com/contact');
+//   });
+
+//   test('Validate dropdown options', async ({ page }) => {
+//     const dropdown = page.locator('[data-test="subject"]');
+//     await dropdown.click();
+
+//     await expect(page.getByText('Customer service')).toBeVisible();
+//     await expect(page.getByText('Webmaster')).toBeVisible();
+//     await expect(page.getByText('Return')).toBeVisible();
+//     await expect(page.getByText('Payments')).toBeVisible();
+//     await expect(page.getByText('Warranty')).toBeVisible();
+//     await expect(page.getByText('Status of my order')).toBeVisible();
+
+//     const options = dropdown.locator('option');
+//     await expect(options).toHaveCount(6);
+//     await expect(options.nth(0)).toHaveText('Customer service');
+//     await expect(options.nth(1)).toHaveText('Webmaster');
+//     await expect(options.nth(2)).toHaveText('Return');
+//     await expect(options.nth(3)).toHaveText('Payments');
+//     await expect(options.nth(4)).toHaveText('Warranty');
+//     await expect(options.nth(5)).toHaveText('Status of my order');
+//   });
+
+//   test('Check selecting customer service option', async ({ page }) => {
+//     //await page.locator('[data-test="subject"]').click();
+//     await page.locator('[data-test="subject"]').selectOption('customer-service');
+//     //await expect(page.locator('[data-test="subject"]')).toHaveText('Customer service');
+//     await expect(page.getByText('Subject', {exact: true})).toHaveText('Customer service');
+//   });
+
 // });
