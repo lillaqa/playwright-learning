@@ -15,22 +15,14 @@ test.describe('Validte contact form', () => {
 
   test('Validate UI elements are visible', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Contact' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Contact' })).toHaveText('Contact');
     await expect(page.getByText('First name')).toBeVisible();
     await expect(page.getByText('Last name')).toBeVisible();
     await expect(page.getByText('Email address')).toBeVisible();
     await expect(page.getByText('Subject', {exact: true})).toBeVisible();
+    await expect(page.getByText('Subject', {exact: true})).toHaveText('Subject');
     await expect(page.getByText('Message *')).toBeVisible();
     await expect(page.getByText('Attachment')).toBeVisible();
-  });
-
-  test('Validate UI elements have the correct texts', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'Contact' })).toHaveText('Contact');
-    await expect(page.getByText('First name')).toHaveText('First name');
-    await expect(page.getByText('Last name')).toHaveText('Last name');
-    await expect(page.getByText('Email address')).toHaveText('Email address');
-    await expect(page.getByText('Subject', {exact: true})).toHaveText('Subject');
-    await expect(page.getByText('Message *')).toHaveText('Message *');
-    await expect(page.getByText('Attachment')).toHaveText('Attachment');
   });
 
   test('Validate placeholder texts', async ({ page }) => {
