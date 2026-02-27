@@ -40,3 +40,21 @@ test.describe('Validte contact form', () => {
     await expect(page.locator('[data-test="subject"]')).toHaveAttribute('placeholder', 'Select a subject *');
   });
 });
+
+test.describe('Test mandatory fields', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('https://practicesoftwaretesting.com/contact');
+  });
+
+  test('Test mandatory text fields sent empty', async ({ page }) => {
+    await page.locator('[data-test="contact-submit"]').click();
+    await expect(page.getByText('First name is required')).toBeVisible();
+    await expect(page.getByText('Last name is required')).toBeVisible();
+    await expect(page.getByText('Email is required')).toBeVisible();
+    await expect(page.getByText('Subject is required')).toBeVisible();
+    await expect(page.getByText('Message is required')).toBeVisible();
+  });
+});
+
+// test.describe('Test Subject dropdown', () => {
+// });
