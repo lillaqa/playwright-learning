@@ -89,8 +89,15 @@ test.describe('Validate global UI elements on contact page', () => {
     await page.goto('https://practicesoftwaretesting.com/contact');
   });
 
-  test('Validate header is visible', async ({ page }) => {
-    await expect(page.getByTestId('header')).toBeVisible();
+  test('Validate header elements: notification bar', async ({ page }) => {
+    await expect(page.locator('[data-test="notification-bar"]')).toBeVisible();
+    await expect(page.locator('[data-test="notification-bar"]')).toHaveText('View the Documentation for this application.');
+    await expect(page.getByRole('link', { name: 'Documentation' })).toHaveAttribute('href', 'https://testsmith-io.github.io/practice-software-testing/#/');
+  });
+
+  test('Validate header elements: navigation bar', async ({ page }) => {
+    await expect(page.getByRole('navigation')).toBeVisible();
+    
   });
 
   test('Validate footer is visible and text is correct', async ({ page }) => {
@@ -99,9 +106,9 @@ test.describe('Validate global UI elements on contact page', () => {
     
     await expect(page.getByRole('link', { name: 'GitHub repo' })).toHaveAttribute('href', 'https://github.com/testsmith-io/practice-software-testing');
     
-    await expect (page.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
+    await expect(page.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
     
-    await expect (page.getByRole('link', { name: 'Barn Images' })).toHaveAttribute('href', 'https://unsplash.com/@barnimages');
+    await expect(page.getByRole('link', { name: 'Barn Images' })).toHaveAttribute('href', 'https://unsplash.com/@barnimages');
 
     await expect(page.getByRole('link', { name: 'Unsplash' })).toHaveAttribute('href', 'https://unsplash.com/photos/t5YUoHW6zRo');
   });
