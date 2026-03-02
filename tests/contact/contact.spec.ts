@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test';
+import FooterPage from '../../pages/footer-page';
+
+let footerPage: FooterPage;
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('https://practicesoftwaretesting.com/contact');
+  footerPage = new FooterPage(page);
+});
 
 test.describe('Check that contact opens', () => {
   test('contact opens', async ({ page }) => {
@@ -9,9 +17,6 @@ test.describe('Check that contact opens', () => {
 });
 
 test.describe('Validte contact form', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-  });
 
   test('Validate UI elements are visible', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Contact' })).toBeVisible();
@@ -34,10 +39,6 @@ test.describe('Validte contact form', () => {
 });
 
 test.describe('Test mandatory fields', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-  });
-
   test('Test mandatory text fields sent empty', async ({ page }) => {
     await page.locator('[data-test="contact-submit"]').click();
     await expect(page.getByText('First name is required')).toBeVisible();
@@ -50,9 +51,6 @@ test.describe('Test mandatory fields', () => {
 
 //WIP dropdown option tests, main issue is the locator of the dropdown list and  validating the new text
 // test.describe('Test Subject dropdown', () => {
-//   test.beforeEach(async ({ page }) => {
-//   await page.goto('https://practicesoftwaretesting.com/contact');
-//   });
 
 //   test('Validate dropdown options', async ({ page }) => {
 //     const dropdown = page.locator('[data-test="subject"]');
@@ -85,9 +83,6 @@ test.describe('Test mandatory fields', () => {
 // });
 
 test.describe('Validate global UI elements on contact page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-  });
 
   test('Validate header elements: notification bar', async ({ page }) => {
     await expect(page.locator('[data-test="notification-bar"]')).toBeVisible();
