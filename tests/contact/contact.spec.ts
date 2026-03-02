@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
 import FooterPage from '../../pages/footer-page';
+import HeaderPage from '../../pages/header-page';
 
 let footerPage: FooterPage;
+let headerPage: HeaderPage;
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com/contact');
-  footerPage = new FooterPage(page);
 });
 
 test.describe('Check that contact opens', () => {
@@ -83,11 +84,14 @@ test.describe('Test mandatory fields', () => {
 // });
 
 test.describe('Validate global UI elements on contact page', () => {
+  test.beforeEach(async ({ page }) => {
+    footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
+  });
 
   test('Validate header elements: notification bar', async ({ page }) => {
-    await expect(page.locator('[data-test="notification-bar"]')).toBeVisible();
-    await expect(page.locator('[data-test="notification-bar"]')).toHaveText('View the Documentation for this application.');
-    await expect(page.getByRole('link', { name: 'Documentation' })).toHaveAttribute('href', 'https://testsmith-io.github.io/practice-software-testing/#/');
+    await headerPage.validateNotificationBar();
+    await headerPage.validateDocumentationLink();
   });
 
   test('Validate header elements: navigation bar', async ({ page }) => {
