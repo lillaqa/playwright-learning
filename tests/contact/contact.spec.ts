@@ -1,4 +1,13 @@
 import { test, expect } from '@playwright/test';
+import FooterPage from '../../pages/footer-page';
+import HeaderPage from '../../pages/header-page';
+
+let footerPage: FooterPage;
+let headerPage: HeaderPage;
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('https://practicesoftwaretesting.com/contact');
+});
 
 test.describe('Check that contact opens', () => {
   test('contact opens', async ({ page }) => {
@@ -9,9 +18,6 @@ test.describe('Check that contact opens', () => {
 });
 
 test.describe('Validte contact form', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-  });
 
   test('Validate UI elements are visible', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Contact' })).toBeVisible();
@@ -34,10 +40,6 @@ test.describe('Validte contact form', () => {
 });
 
 test.describe('Test mandatory fields', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-  });
-
   test('Test mandatory text fields sent empty', async ({ page }) => {
     await page.locator('[data-test="contact-submit"]').click();
     await expect(page.getByText('First name is required')).toBeVisible();
@@ -50,9 +52,6 @@ test.describe('Test mandatory fields', () => {
 
 //WIP dropdown option tests, main issue is the locator of the dropdown list and  validating the new text
 // test.describe('Test Subject dropdown', () => {
-//   test.beforeEach(async ({ page }) => {
-//   await page.goto('https://practicesoftwaretesting.com/contact');
-//   });
 
 //   test('Validate dropdown options', async ({ page }) => {
 //     const dropdown = page.locator('[data-test="subject"]');
@@ -86,13 +85,13 @@ test.describe('Test mandatory fields', () => {
 
 test.describe('Validate global UI elements on contact page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
+    footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
   });
 
   test('Validate header elements: notification bar', async ({ page }) => {
-    await expect(page.locator('[data-test="notification-bar"]')).toBeVisible();
-    await expect(page.locator('[data-test="notification-bar"]')).toHaveText('View the Documentation for this application.');
-    await expect(page.getByRole('link', { name: 'Documentation' })).toHaveAttribute('href', 'https://testsmith-io.github.io/practice-software-testing/#/');
+    await headerPage.validateNotificationBar();
+    await headerPage.validateDocumentationLink();
   });
 
   test('Validate header elements: navigation bar', async ({ page }) => {
@@ -101,16 +100,11 @@ test.describe('Validate global UI elements on contact page', () => {
   });
 
   test('Validate footer is visible and text is correct', async ({ page }) => {
-    await expect(page.getByRole('paragraph')).toBeVisible();
-    await expect(page.getByRole('paragraph')).toHaveText('This is a DEMO application (GitHub repo), used for software testing training purpose. | Privacy Policy | Banner photo by Barn Images on Unsplash.');
-    
-    await expect(page.getByRole('link', { name: 'GitHub repo' })).toHaveAttribute('href', 'https://github.com/testsmith-io/practice-software-testing');
-    
-    await expect(page.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
-    
-    await expect(page.getByRole('link', { name: 'Barn Images' })).toHaveAttribute('href', 'https://unsplash.com/@barnimages');
-
-    await expect(page.getByRole('link', { name: 'Unsplash' })).toHaveAttribute('href', 'https://unsplash.com/photos/t5YUoHW6zRo');
+    await footerPage.validateFooterText();
+    await footerPage.validateGitHubLink();
+    await footerPage.validatePrivacyPolicyLink();
+    await footerPage.validateBarnImagesLink();
+    await footerPage.validateUnsplashLink();
   });
 });
 
