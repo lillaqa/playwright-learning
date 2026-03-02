@@ -96,16 +96,11 @@ test.describe('Validate global UI elements on contact page', () => {
   });
 
   test('Validate footer is visible and text is correct', async ({ page }) => {
-    await expect(page.getByRole('paragraph')).toBeVisible();
-    await expect(page.getByRole('paragraph')).toHaveText('This is a DEMO application (GitHub repo), used for software testing training purpose. | Privacy Policy | Banner photo by Barn Images on Unsplash.');
-    
-    await expect(page.getByRole('link', { name: 'GitHub repo' })).toHaveAttribute('href', 'https://github.com/testsmith-io/practice-software-testing');
-    
-    await expect(page.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
-    
-    await expect(page.getByRole('link', { name: 'Barn Images' })).toHaveAttribute('href', 'https://unsplash.com/@barnimages');
-
-    await expect(page.getByRole('link', { name: 'Unsplash' })).toHaveAttribute('href', 'https://unsplash.com/photos/t5YUoHW6zRo');
+    await footerPage.validateFooterText();
+    await footerPage.validateGitHubLink();
+    await footerPage.validatePrivacyPolicyLink();
+    await footerPage.validateBarnImagesLink();
+    await footerPage.validateUnsplashLink();
   });
 });
 
