@@ -94,9 +94,8 @@ test.describe('Validate global UI elements on contact page', () => {
     await headerPage.validateDocumentationLink();
   });
 
-  test('Validate header elements: navigation bar', async ({ page }) => {
-    await expect(page.getByRole('navigation')).toBeVisible();
-    
+  test('Validate header elements: app header', async ({ page }) => {
+    await headerPage.validateAppHeader();
   });
 
   test('Validate footer is visible and text is correct', async ({ page }) => {
