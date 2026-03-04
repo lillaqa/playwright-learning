@@ -18,6 +18,7 @@ test.describe('Validate product page without authentication', () => {
         await expect(page.getByLabel('brand')).toHaveText('MightyCraft Hardware');
         await expect(page.getByText('$')).toBeVisible();
         await expect(page.getByTestId('unit-price')).toHaveText('9.17');
+        await expect(page.getByTestId('unit-price')).toBeNumber();
         await expect(page.getByTestId('product-description')).not.toBeEmpty();
         await expect(page.getByTestId('add-to-cart')).toHaveText('Add to cart');
         await expect(page.getByTestId('add-to-favorites')).toHaveText('Add to favourites');
