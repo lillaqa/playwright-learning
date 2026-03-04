@@ -6,13 +6,10 @@ let homePage: HomePage;
 test.beforeEach(async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com/');
     homePage = new HomePage(page);
-    //let productGrid = homePage.productGrid;
 });
 
 test.describe('Home page without authentication', () => {
-    // test.beforeEach(async ({ page }) => {
-    //     let productGrid = homePage.productGrid;
-    // });
+   
 
     test("visual test no auth", async ({ page }) => {
         await page.waitForLoadState('networkidle');
@@ -30,14 +27,12 @@ test.describe('Home page without authentication', () => {
     });
 
     test("Validate product grid", async ({ page }) => {
-        //const productGrid = page.locator(".col-md-9");
         await expect(homePage.productGrid.getByRole('link')).toHaveCount(9);
         //value alternative
         //expect(await productGrid.getByRole('link').count()).toBe(9);
     });
 
     test("Validate search", async ({ page }) => {
-        //const productGrid = page.locator(".col-md-9");
         await page.getByPlaceholder('Search for products').fill('Thor Hammer');
         await page.getByRole('button', { name: 'Search' }).click();
         await expect(homePage.productGrid.getByRole('link')).toHaveCount(1);
