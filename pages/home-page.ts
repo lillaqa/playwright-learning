@@ -14,7 +14,9 @@ export class HomePage {
     }
 
     //methods
-
+    async goto() {
+        await this.page.goto('https://practicesoftwaretesting.com/');
+    }
 
 }
 

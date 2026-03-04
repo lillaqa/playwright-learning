@@ -4,8 +4,9 @@ import HomePage from '../../pages/home-page';
 let homePage: HomePage;
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/');
+    //await page.goto('https://practicesoftwaretesting.com/');
     homePage = new HomePage(page);
+    await homePage.goto();
 });
 
 test.describe('Home page without authentication', () => {
