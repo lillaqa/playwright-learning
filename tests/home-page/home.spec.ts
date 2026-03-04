@@ -1,9 +1,18 @@
 import { test, expect } from '@playwright/test';
+import HomePage from '../../pages/home-page';
+
+let homePage: HomePage;
+
+test.beforeEach(async ({ page }) => {
+    await page.goto('https://practicesoftwaretesting.com/');
+    homePage = new HomePage(page);
+    //let productGrid = homePage.productGrid;
+});
 
 test.describe('Home page without authentication', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto('https://practicesoftwaretesting.com/');
-    });
+    // test.beforeEach(async ({ page }) => {
+    //     let productGrid = homePage.productGrid;
+    // });
 
     test("visual test no auth", async ({ page }) => {
         await page.waitForLoadState('networkidle');
@@ -21,27 +30,23 @@ test.describe('Home page without authentication', () => {
     });
 
     test("Validate product grid", async ({ page }) => {
-        const productGrid = page.locator(".col-md-9");
-        await expect(productGrid.getByRole('link')).toHaveCount(9);
+        //const productGrid = page.locator(".col-md-9");
+        await expect(homePage.productGrid.getByRole('link')).toHaveCount(9);
         //value alternative
         //expect(await productGrid.getByRole('link').count()).toBe(9);
     });
 
     test("Validate search", async ({ page }) => {
-        const productGrid = page.locator(".col-md-9");
+        //const productGrid = page.locator(".col-md-9");
         await page.getByPlaceholder('Search for products').fill('Thor Hammer');
         await page.getByRole('button', { name: 'Search' }).click();
-        await expect(productGrid.getByRole('link')).toHaveCount(1);
+        await expect(homePage.productGrid.getByRole('link')).toHaveCount(1);
     });
 
 });
 
 test.describe('Home page with authentication', () => {
     test.use({ storageState: '.auth/customer1.json' });
-    
-    test.beforeEach(async ({ page }) => {
-        await page.goto('https://practicesoftwaretesting.com/');
-    });
 
     test("visual test", async ({ page }) => {
         await expect(page).toHaveScreenshot('home-page-with-auth.png');
