@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { registerUser } from '../../lib/datafactory/register';
+import { registerUser } from '@datafactory/register';
 import LoginPage from '../../pages/login.page';
 let loginPage: LoginPage;
 
