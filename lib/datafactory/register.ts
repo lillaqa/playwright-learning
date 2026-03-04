@@ -1,4 +1,5 @@
 import { expect, request } from '@playwright/test';
+import { randomState } from '../helpers/states';
 
 export async function registerUser(email: string, password: string) {
     const apiURL = process.env.API_URL;
@@ -14,7 +15,7 @@ export async function registerUser(email: string, password: string) {
              address: {
                 street: "101 Testing Way",
                 city: "New York",
-                state: "New York",
+                state: randomState(),
                 country: "US",
                 postal_code: "55555",
             },
