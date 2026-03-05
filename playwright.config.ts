@@ -49,7 +49,7 @@ export default defineConfig({
     {
       name: 'chromium',
       dependencies: ['setup'],
-      use: { ...devices['Desktop Chrome'], permissions: ['clipboard-read'], viewport: { width: 1280, height: 720 } },
+      use: { ...devices['Desktop Chrome'], permissions: ['clipboard-read', 'geolocation'], geolocation: { latitude: 37.7749, longitude: -122.4194 }, viewport: { width: 1280, height: 720 } },
     },
 
     {
