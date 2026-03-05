@@ -60,4 +60,16 @@ test.describe('API practice tests', () => {
         }
         //await expect(homePage.productGrid).toContainText("Hammer");
     });
+
+    test('Validate pruduct data is loaded from har file', async ({ page }) => {
+        let products: any;
+        await test.step('mock /products', async () => {
+            await page.routeFromHAR('products.har', {
+                url: 'https://api.practicesoftwaretesting.com/products**',
+                update: true,
+            });
+        });
+        await page.goto('/');
+        await expect(homePage.productGrid).toContainText("Happy Path Pliers");
+    });
 });
