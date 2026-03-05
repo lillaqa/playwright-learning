@@ -40,3 +40,24 @@ test.describe('Home page without authentication', () => {
     });
 
 });
+
+test.describe('API practice tests', () => {
+    test('Validate product data is visible on UI from API', async ({ page }) => {
+        let products: any;
+        await test.step('intercept /products', async () => {
+            await page.route('https://api.practicesoftwaretesting.com/products**', async (route) => {
+                const response = await route.fetch();
+                products = await response.json();
+                route.continue();
+            });
+        });
+        await page.goto('/');
+        //the test was too fast, so this is slowing it down
+        await expect(page.locator('skeleton').first()).not.toBeVisible();
+        for (const product of products.data) {
+            await expect(homePage.productGrid).toContainText(product.name);
+            await expect(homePage.productGrid).toContainText(product.price.toString());
+        }
+        //await expect(homePage.productGrid).toContainText("Hammer");
+    });
+});
