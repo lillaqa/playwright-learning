@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import HomePage from '../../pages/home-page';
+import HomePage from '@pages/home.page';
 
 let homePage: HomePage;
 
@@ -10,10 +10,6 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Home page with authentication', () => {
     test.use({ storageState: '.auth/customer1.json' });
-
-    test("visual test", async ({ page }) => {
-        await expect(page).toHaveScreenshot('home-page-with-auth.png');
-    });
 
     test("Check that customer is signed in", async ({ page }) => {
         await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();

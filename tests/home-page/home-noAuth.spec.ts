@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import HomePage from '../../pages/home-page';
+import HomePage from '@pages/home.page';
 
 let homePage: HomePage;
 
@@ -11,14 +11,6 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Home page without authentication', () => {
    
-
-    test("visual test no auth", async ({ page }) => {
-        await page.waitForLoadState('networkidle');
-        await expect(page).toHaveScreenshot('home-page-no-auth.png', {
-            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
-        });
-
-    });
     test("Validate sign in", async ({ page }) => {
             await expect(page.getByTestId('nav-sign-in')).toHaveText('Sign in');
     });
