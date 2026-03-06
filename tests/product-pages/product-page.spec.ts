@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
-import FooterPage from '../../pages/footer-page';
-import HeaderPage from '../../pages/header-page';
+import FooterPage from '@pages/footer.page';
+import HeaderPage from '@pages/header.page';
 
 let footerPage: FooterPage;
 let headerPage: HeaderPage;
