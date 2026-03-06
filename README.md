@@ -1,7 +1,43 @@
-**WIP: Playwright learning/demo repository**
+# 🚀 Test Automation Lab: Playwright Courses Implementation
 
-**More information about the tested site**
+This repository serves as my hands-on playground for concepts learned in my Applitools Test Automation University and other Playwright-related courses. Instead of simply following the tutorials, I decided to implement an entire automation project on a public practice site. 
 
-https://practicesoftwaretesting.com/
+The site I chose to automate: [Practice Software Testing](https://practicesoftwaretesting.com/), [Swagger for API](https://api.practicesoftwaretesting.com/api/documentation#/)
 
-SWAGGER for API https://api.practicesoftwaretesting.com/api/documentation#/
+## 🛠️ Tech Stack
+
+    Language: [Typescript]
+
+    Framework: [Playwright]
+
+    Testing Tool: -
+    
+
+## 📈 Roadmap & Progress
+
+I’m treating this repo as a "living document" of my automation journey.
+
+    [x] Phase 1: Basic environment setup and first functional tests.
+
+    [x] Phase 2: Parameterising tests and implementing Page Object Model (POM).
+
+    [ ] Phase 3: Finish login page and user routes
+    
+    [ ] Phase 4: Visual tests
+
+    [ ] Phase 5: Covering main functionality with API tests
+
+
+
+## 🏃 How to Run
+Bash
+
+### Clone the repo
+```git clone [repo-link]```
+
+### Install dependencies
+```npm init playwright@latest```
+
+### Run tests
+```npx playwright test```
+
