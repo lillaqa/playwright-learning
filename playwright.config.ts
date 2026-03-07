@@ -12,8 +12,6 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 30_000,
-  globalTimeout: 10 * 60 * 1000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -24,7 +22,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html'],['list']],
+  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -32,12 +30,7 @@ export default defineConfig({
     baseURL: 'https://practicesoftwaretesting.com',
     testIdAttribute: "data-test",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
-    actionTimeout: 0,
-    ignoreHTTPSErrors: true, 
-    video: 'retain-on-failure',
-    screenshot: 'only-on-failure', 
-    headless: true
+    trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
@@ -48,21 +41,21 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      dependencies: ['setup'],
+      //dependencies: ['setup'],
       use: { ...devices['Desktop Chrome'], permissions: ['clipboard-read'] },
     },
 
     {
       name: 'firefox',
-      dependencies: ['setup'],
+      //dependencies: ['setup'],
       use: { ...devices['Desktop Firefox'] },
     },
 
-    // {
-    //   name: 'webkit',
-    //   dependencies: ['setup'],
-    //   use: { ...devices['Desktop Safari'], permissions: ['clipboard-read'] },
-    // },
+    {
+      name: 'webkit',
+      //dependencies: ['setup'],
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
