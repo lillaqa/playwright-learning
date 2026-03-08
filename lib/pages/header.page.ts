@@ -8,6 +8,7 @@ export class HeaderPage {
     readonly appHeader: Locator;
     readonly guideButton: Locator;
     readonly bugHuntingButton: Locator;
+    //readonly logoToolshop: Locator;
 
     //constructor
     constructor(page: Page) {
