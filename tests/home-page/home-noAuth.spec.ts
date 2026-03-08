@@ -61,14 +61,12 @@ test.describe('Validate sidebar', () => {
     });
 
     test('validate price range slider default state', async ({ page }) => {
-        await expect(page.locator('.ngx-slider-span.ngx-slider-bar-wrapper.ngx-slider-full-bar')).toBeVisible();
-        await expect(page.getByRole('slider', { name: 'ngx-slider', exact: true })).toBeVisible();
-        await expect(page.getByRole('slider', { name: 'ngx-slider-max' })).toBeVisible();
-        await expect(page.locator('div').filter({ hasText: /^02001100$/ })).toBeVisible();
-        await expect(page.locator('#filters').getByText('1', { exact: true })).toHaveText('1');
-        await expect(page.getByText('100')).toHaveText('100');
-        await expect(page.getByText('200')).toHaveText('200');
-
+        await expect(homePage.priceSlider.minPointer).toBeVisible();
+        await expect(homePage.priceSlider.maxPointer).toBeVisible();
+        await expect(homePage.priceSlider.floorLabel).toHaveText(/0/);
+        await expect(homePage.priceSlider.ceilLabel).toHaveText('200');
+        await expect(homePage.priceSlider.currentMinLabel).toHaveText('1');
+        await expect(homePage.priceSlider.currentMaxLabel).toHaveText('100');
     });
 
 
