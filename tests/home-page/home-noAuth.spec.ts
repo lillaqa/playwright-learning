@@ -6,7 +6,6 @@ let homePage: HomePage;
 let headerPage: HeaderPage;
 
 test.beforeEach(async ({ page }) => {
-    //await page.goto('https://practicesoftwaretesting.com/');
     homePage = new HomePage(page);
     headerPage = new HeaderPage(page);
     await homePage.goto();
@@ -59,6 +58,17 @@ test.describe('Validate sidebar', () => {
         await expect(page.getByRole('heading', { name: 'By category:' })).toHaveText('By category:');
         await expect(page.getByRole('heading', { name: 'By brand:'})).toHaveText('By brand:');
         await expect(page.getByRole('heading', { name: 'Sustainability:'})).toHaveText('Sustainability:');
+    });
+
+    test('validate price range slider default state', async ({ page }) => {
+        await expect(page.locator('.ngx-slider-span.ngx-slider-bar-wrapper.ngx-slider-full-bar')).toBeVisible();
+        await expect(page.getByRole('slider', { name: 'ngx-slider', exact: true })).toBeVisible();
+        await expect(page.getByRole('slider', { name: 'ngx-slider-max' })).toBeVisible();
+        await expect(page.locator('div').filter({ hasText: /^02001100$/ })).toBeVisible();
+        await expect(page.locator('#filters').getByText('1', { exact: true })).toHaveText('1');
+        await expect(page.getByText('100')).toHaveText('100');
+        await expect(page.getByText('200')).toHaveText('200');
+
     });
 
 
