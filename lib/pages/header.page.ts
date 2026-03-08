@@ -8,8 +8,8 @@ export class HeaderPage {
     readonly appHeader: Locator;
     readonly guideButton: Locator;
     readonly bugHuntingButton: Locator;
-    readonly logo: Locator;
-    readonly logoMovingGear;
+    readonly gearGroup: Locator;
+    readonly gearPath: Locator;
 
     //constructor
     constructor(page: Page) {
@@ -19,6 +19,9 @@ export class HeaderPage {
         this.appHeader = this.page.locator('app-header');
         this.guideButton = this.page.getByRole('button', { name: 'Testing Guide' });
         this.bugHuntingButton = this.page.getByRole('button', { name: 'Bug Hunting' });
+        this.gearGroup = this.page.locator('g.gear');
+        this.gearPath = this.gearGroup.locator('path');
+
     }
 
     //methods
@@ -35,6 +38,10 @@ export class HeaderPage {
         await expect(this.guideButton).toHaveText('Testing Guide');
         await expect(this.bugHuntingButton).toContainText('Bug Hunting');  
 
+    }
+
+    async logoIsVisible() {
+        await expect(this.gearGroup).toBeVisible();
     }
 
 }

@@ -1,11 +1,14 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '@pages/home.page';
+import HeaderPage from '@pages/header.page';
 
 let homePage: HomePage;
+let headerPage: HeaderPage;
 
 test.beforeEach(async ({ page }) => {
     //await page.goto('https://practicesoftwaretesting.com/');
     homePage = new HomePage(page);
+    headerPage = new HeaderPage(page);
     await homePage.goto();
 });
 
@@ -16,7 +19,9 @@ test.describe('Validate home page header', () => {
 
     //SVG logo, the test needs to be upgraded
     test("Validate logo", async ({ page }) => {
-        await expect(page.getByRole('link', { name: 'Practice Software Testing -' })).toBeVisible();
+        //await expect(page.getByRole('link', { name: 'Practice Software Testing -' })).toBeVisible();
+        await headerPage.logoIsVisible();
+        //await expect(headerPage.gearGroup).toBeVisible();
     });
 
     test("Validate sign in", async ({ page }) => {
