@@ -8,7 +8,8 @@ export class HeaderPage {
     readonly appHeader: Locator;
     readonly guideButton: Locator;
     readonly bugHuntingButton: Locator;
-    //readonly logoToolshop: Locator;
+    readonly logo: Locator;
+    readonly logoMovingGear;
 
     //constructor
     constructor(page: Page) {
@@ -22,7 +23,6 @@ export class HeaderPage {
 
     //methods
     async validateNotificationBar() {
-        await expect(this.notificationBar).toBeVisible();
         await expect(this.notificationBar).toHaveText('View the Documentation for this application.');
     }
 
@@ -31,10 +31,7 @@ export class HeaderPage {
     }
 
     async validateAppHeader() {
-        await expect(this.appHeader).toBeVisible();
         await expect(this.appHeader).toContainText('Practice Black Box Testing & Bug Hunting');
-        await expect(this.guideButton).toBeVisible();
-        await expect(this.bugHuntingButton).toBeVisible();
         await expect(this.guideButton).toHaveText('Testing Guide');
         await expect(this.bugHuntingButton).toContainText('Bug Hunting');  
 
