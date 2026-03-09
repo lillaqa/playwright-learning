@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
+import HomePage from '@pages/home.page';
+
+let homePage: HomePage;
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/');
+    homePage = new HomePage(page);
+    await homePage.goto();
 });
 
 test.describe('Sorting products', () => {});
@@ -10,7 +14,19 @@ test.describe('Filtering products category', () => {});
 
 test.describe('Filtering products price', () => {});
 
-test.describe('Searching products', () => {});
+test.describe('Searching products', () => {
+    test('Check exactly one product found', async ({ page }) => {
+        await homePage.searchForText.fill('Thor Hammer');
+        await homePage.submitSearch;
+        await expect(homePage.searchResult).toHaveCount(1);
+    });
+
+    test('Check no result found', async ({ page }) => {
+        await homePage.searchForText.fill('asdasdqwe');
+        await homePage.submitSearch;
+        await expect(homePage.productGrid.getByRole('link')).toHaveCount(0);
+    });
+});
 
 test.describe('Pagination', () => {
 

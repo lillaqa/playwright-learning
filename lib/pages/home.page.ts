@@ -39,6 +39,10 @@ export class HomePage {
     readonly productGrid: Locator;
     readonly banner: Locator;
     readonly priceSlider: PriceSlider;
+    readonly searchForText: Locator;
+    readonly searchReset: Locator;
+    readonly searchButton: Locator;
+    readonly searchResult: Locator;
 
     //constructor
     constructor(page: Page) {
@@ -46,11 +50,23 @@ export class HomePage {
         this.productGrid = this.page.locator(".col-md-9");
         this.banner = this.page.getByRole('img', { name: 'Banner' });
         this.priceSlider = new PriceSlider(page);
+        this.searchForText = this.page.locator('[data-test="search-query"]');
+        this.searchReset = this.page.locator('[data-test="search-reset"]');
+        this.searchButton = this.page.locator('[data-test="search-submit"]');
+        this.searchResult = this.page.locator('[data-test="search_completed"]');
     }
 
     //methods
     async goto() {
         await this.page.goto('https://practicesoftwaretesting.com/');
+    }
+
+    async resetSearch() {
+        await this.searchReset.click();
+    }
+
+    async submitSearch() {
+        await this.searchButton.click();
     }
 
 }

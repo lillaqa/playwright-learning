@@ -41,12 +41,6 @@ test.describe('Validate home page main sections', () => {
         //expect(await productGrid.getByRole('link').count()).toBe(9);
     });
 
-    test('Validate search', async ({ page }) => {
-        await page.getByPlaceholder('Search for products').fill('Thor Hammer');
-        await page.getByRole('button', { name: 'Search' }).click();
-        await expect(homePage.productGrid.getByRole('link')).toHaveCount(1);
-    });
-
 });
 
 test.describe('Validate sidebar', () => {
