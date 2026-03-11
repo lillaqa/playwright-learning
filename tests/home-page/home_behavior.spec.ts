@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '@pages/home.page';
+import { generateRandomString } from '@helpers/randomText';
 
 let homePage: HomePage;
 
@@ -24,10 +25,12 @@ test.describe('Searching products', () => {
     });
 
     test('Check no result found', async ({ page }) => {
-        await homePage.searchForText.fill('asdasdqwe');
+        const junkInput = generateRandomString(13);
+        await homePage.searchForText.fill(junkInput);
         await homePage.submitSearch();
         page.waitForTimeout(200);
         await expect(homePage.productGrid.getByRole('link')).toHaveCount(0);
+        await expect(page.locator('[data-test="no-results"]')).toHaveText('There are no products found.');
     });
 });
 
