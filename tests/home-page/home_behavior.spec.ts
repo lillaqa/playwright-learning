@@ -17,13 +17,16 @@ test.describe('Filtering products price', () => {});
 test.describe('Searching products', () => {
     test('Check exactly one product found', async ({ page }) => {
         await homePage.searchForText.fill('Thor Hammer');
-        await homePage.submitSearch;
-        await expect(homePage.searchResult).toHaveCount(1);
+        await homePage.submitSearch();
+        page.waitForTimeout(200);
+        await expect(homePage.productGrid.getByRole('link')).toHaveCount(1);
+        //await expect(homePage.searchResult).toHaveCount(1);
     });
 
     test('Check no result found', async ({ page }) => {
         await homePage.searchForText.fill('asdasdqwe');
-        await homePage.submitSearch;
+        await homePage.submitSearch();
+        page.waitForTimeout(200);
         await expect(homePage.productGrid.getByRole('link')).toHaveCount(0);
     });
 });

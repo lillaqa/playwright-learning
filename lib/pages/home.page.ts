@@ -67,6 +67,8 @@ export class HomePage {
 
     async submitSearch() {
         await this.searchButton.click();
+        //keep this as a backup here temporarly
+        //await this.searchButton.press('Enter');
     }
 
 }
