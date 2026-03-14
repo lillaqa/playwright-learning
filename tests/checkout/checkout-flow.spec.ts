@@ -1,21 +1,35 @@
 import {test, expect} from '@playwright/test';
+import { HomePage } from '@pages/home.page';
+import { ProductPage } from '@pages/product.page';
+import { CheckoutPage } from '@pages/checkout.page';
+
+let homePage: HomePage;
+let productPage: ProductPage;
+let checkoutPage: CheckoutPage;
+//let headerPage: HeaderPage;
+
+test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    productPage = new ProductPage(page);
+    checkoutPage = new CheckoutPage(page);
+    //headerPage = new HeaderPage(page);
+    await homePage.goto();
+});
 
 test.describe('Validate positive checkout flow with authenticated user', () => {
     test.use({storageState: '.auth/customer1.json'});
 
-    test.beforeEach(async ({page}) => {
-        await page.goto('https://practicesoftwaretesting.com/');
-    });
-
     test('add bolt cutters to cart', async ({page}) => {
         await page.getByText('Bolt Cutters').click();
-        await page.getByTestId('add-to-cart').click();
-        await expect(page.getByTestId('cart-quantity')).toHaveText('1');
+        await productPage.addToCart.click();
+        await expect(productPage.cartQuantity).toHaveText('1');
     });
 
     test('proceed to checkout', async ({page}) => {
+        await page.getByText('Bolt Cutters').click();   
+        await productPage.addToCart.click();
+        await expect(productPage.cartQuantity).toHaveText('1');
         await page.getByTestId('nav-cart').click();
-        await page.getByTestId('proceed-1').click();
-        await page.getByTestId('proceed-2').click();
+        await checkoutPage.proceedButton.click();
     });
 });
