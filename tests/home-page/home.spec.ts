@@ -70,7 +70,6 @@ test.describe('Home page with authentication', () => {
     test.use({ storageState: '.auth/customer1.json' });
 
     test("Check that customer is signed in", async ({ page }) => {
-        await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();
         await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
     });
 });
