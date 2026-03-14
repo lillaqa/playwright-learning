@@ -12,9 +12,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Validate home page header', () => {
-    test("Validate title", async ({ page }) => {
-        await expect(page.getByTitle('Practice Software Testing - Toolshop - v5.0')).toBeVisible();
-    });
+    test("Validate page title", async ({ page }) => {
+        await expect(page).toHaveTitle('Practice Software Testing - Toolshop - v5.0');
+}   );
 
     //SVG logo, the test needs to be upgraded
     test("Validate logo", async ({ page }) => {
