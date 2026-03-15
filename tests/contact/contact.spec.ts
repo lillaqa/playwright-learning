@@ -33,10 +33,9 @@ test.describe('Validte contact form', () => {
   });
 
   test('Validate placeholder texts', async ({ page }) => {
-    await expect(page.locator('[data-test="first-name"]')).toHaveAttribute('placeholder', 'Your first name *');
-    await expect(page.locator('[data-test="last-name"]')).toHaveAttribute('placeholder', 'Your last name *');
-    await expect(page.locator('[data-test="email"]')).toHaveAttribute('placeholder', 'Your email *');
-    await expect(page.getByPlaceholder('Select a subject *')).toBeVisible();
+    await expect(contactPage.firstNameTextbox).toHaveAttribute('placeholder', 'Your first name *');
+    await expect(contactPage.lastNameTextbox).toHaveAttribute('placeholder', 'Your last name *');
+    await expect(contactPage.emailTextbox).toHaveAttribute('placeholder', 'Your email *');
     await expect(page.locator('[data-test="subject"]')).toHaveAttribute('placeholder', 'Select a subject *');
   });
 });

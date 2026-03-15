@@ -5,6 +5,10 @@ export class ContactPage {
     readonly page: Page;
     readonly contactHeading: Locator;
     readonly contactForm: Locator;
+    readonly firstNameTextbox: Locator;
+    readonly lastNameTextbox: Locator;
+    readonly emailTextbox: Locator;
+    readonly messageTextbox: Locator;
     readonly firstNameMandatory: Locator;
     readonly lastNameMandatory: Locator;
     readonly emailMandatory: Locator;
@@ -17,6 +21,10 @@ export class ContactPage {
         this.page = page;
         this.contactHeading = page.getByRole('heading', { name: 'Contact' });
         this.contactForm = page.locator('form');
+        this.firstNameTextbox = page.getByRole('textbox', { name: 'First name' });
+        this.lastNameTextbox = page.getByRole('textbox', { name: 'Last name' });
+        this.emailTextbox = page.getByRole('textbox', { name: 'Email address' });
+        this.messageTextbox = page.getByRole('textbox', { name: 'Message *'});
         this.firstNameMandatory = page.getByText('First name is required');
         this.lastNameMandatory = page.getByText('Last name is required');
         this.emailMandatory = page.getByText('Email is required');
@@ -66,11 +74,6 @@ await expect(page.locator('form')).toMatchAriaSnapshot(`
       - option "Status of my order"
     `);
 });
-
-  await expect(page.locator('form')).toMatchAriaSnapshot(`
-    - text: Message *
-    - textbox "Message *"
-    `);
 
   await expect(page.locator('form')).toMatchAriaSnapshot(`
     - text: Attachment
