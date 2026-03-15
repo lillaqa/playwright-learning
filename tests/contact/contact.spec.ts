@@ -3,9 +3,9 @@ import { ContactPage } from '@pages/contact.page';
 
 let contactPage: ContactPage;
 
+
 test.beforeEach(async ({ page }) => {
   contactPage = new ContactPage(page);
-  await page.goto('https://practicesoftwaretesting.com/contact');
 });
 
 test.describe('Check that contact opens', () => {
@@ -17,6 +17,9 @@ test.describe('Check that contact opens', () => {
 });
 
 test.describe('Validte contact form', () => {
+  test.beforeEach(async ({ page }) => {
+    contactPage.goto();
+  })
 
   test('Validate UI elements are visible', async ({ page }) => {
     await expect(contactPage.contactHeading).toHaveText('Contact');

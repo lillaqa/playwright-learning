@@ -26,7 +26,9 @@ export class ContactPage {
 
 
     //methods
-
+    async goto() {
+        await this.page.goto('https://practicesoftwaretesting.com/contact');
+    }
 }
 
 export default ContactPage;
