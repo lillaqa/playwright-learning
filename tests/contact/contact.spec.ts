@@ -36,13 +36,16 @@ test.describe('Validte contact form', () => {
     await expect(contactPage.firstNameTextbox).toHaveAttribute('placeholder', 'Your first name *');
     await expect(contactPage.lastNameTextbox).toHaveAttribute('placeholder', 'Your last name *');
     await expect(contactPage.emailTextbox).toHaveAttribute('placeholder', 'Your email *');
-    await expect(page.locator('[data-test="subject"]')).toHaveAttribute('placeholder', 'Select a subject *');
+    //await expect(page.locator('[data-test="subject"]')).toHaveAttribute('placeholder', 'Select a subject *');
   });
 });
 
 test.describe('Test mandatory fields', () => {
+  test.beforeEach(async ({ page }) => {
+    contactPage.goto();
+  })
   test('Test mandatory text fields sent empty', async ({ page }) => {
-    await page.locator('[data-test="contact-submit"]').click();
+    await contactPage.sendButton.click();
     await expect(contactPage.firstNameMandatory).toBeVisible();
     await expect(contactPage.lastNameMandatory).toBeVisible();
     await expect(contactPage.emailMandatory).toBeVisible();

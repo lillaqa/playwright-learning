@@ -9,6 +9,7 @@ export class ContactPage {
     readonly lastNameTextbox: Locator;
     readonly emailTextbox: Locator;
     readonly messageTextbox: Locator;
+    readonly sendButton: Locator;
     readonly firstNameMandatory: Locator;
     readonly lastNameMandatory: Locator;
     readonly emailMandatory: Locator;
@@ -25,6 +26,7 @@ export class ContactPage {
         this.lastNameTextbox = page.getByRole('textbox', { name: 'Last name' });
         this.emailTextbox = page.getByRole('textbox', { name: 'Email address' });
         this.messageTextbox = page.getByRole('textbox', { name: 'Message *'});
+        this.sendButton = page.locator('[data-test="contact-submit"]');
         this.firstNameMandatory = page.getByText('First name is required');
         this.lastNameMandatory = page.getByText('Last name is required');
         this.emailMandatory = page.getByText('Email is required');
@@ -48,7 +50,7 @@ await expect(page.locator('form')).toMatchAriaSnapshot(`
       - /placeholder: Your first name *
     `);
 
-
+<input type="submit" data-test="contact-submit" class="btnSubmit" value="Send">
 
   await expect(page.locator('form')).toMatchAriaSnapshot(`
     - text: Last name
