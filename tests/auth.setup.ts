@@ -6,7 +6,9 @@ setup("Create customer nr. 1", async ({ page, context }) => {
     const customer1Auth = ".auth/customer1.json";
 
     await page.goto("https://practicesoftwaretesting.com/auth/login"); 
-    await page.locator('[data-test="email"]').fill("customer@practicesoftwaretesting.com");
+    const emailInput = page.locator('[data-test="email"]');
+    await emailInput.waitFor({ state: 'visible' }); 
+    await emailInput.fill("customer@practicesoftwaretesting.com");
     await page.getByTestId("password").fill("welcome01");
     await page.getByTestId("login-submit").click();
 
