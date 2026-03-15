@@ -5,10 +5,8 @@ setup("Create customer nr. 1", async ({ page, context }) => {
     const user = pickStaticUser();
     const customer1Auth = ".auth/customer1.json";
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    const emailInput = page.getByTestId("email");
-    await emailInput.waitFor({ state: 'visible' }); 
-    await emailInput.fill(user.email);
+    await page.goto("https://practicesoftwaretesting.com/auth/login"); 
+    await page.locator('[data-test="email"]').fill(user.email);
     await page.getByTestId("password").fill(user.password);
     await page.getByTestId("login-submit").click();
 
