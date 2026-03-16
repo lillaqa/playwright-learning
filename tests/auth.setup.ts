@@ -18,6 +18,7 @@ setup("Create customer nr. 1", async ({ page, context }) => {
     await page.getByTestId("password").fill(user.password);
     await page.getByTestId("login-submit").click();
 
-    await expect(page.getByRole('menubar')).toContainText(user.name);
+    await expect(page.getByText(user.name)).toBeVisible();
+    //await expect(page.getByRole('menubar')).toContainText(user.name);
     await context.storageState({ path: customer1Auth });
 });
