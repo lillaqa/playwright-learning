@@ -4,6 +4,8 @@ This repository serves as my hands-on playground for concepts learned in my Appl
 
 The site I chose to automate: [Practice Software Testing](https://practicesoftwaretesting.com/), [Swagger for API](https://api.practicesoftwaretesting.com/api/documentation#/)
 
+Note: CI execution may fail due to Cloudflare bot protection on the target practice site. All of the tests in the main branch run green locally. 
+
 ## 🛠️ Tech Stack
 
     Language: [Typescript]
