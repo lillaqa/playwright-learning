@@ -1,43 +1,24 @@
 import { test as setup, expect } from '@playwright/test';
+import { pickStaticUser } from '@helpers/selectFromStaticUsers';
 
 setup("Create customer nr. 1", async ({ page, context }) => {
-    const email = "customer@practicesoftwaretesting.com";
-    const password = "welcome01";
+    const user = pickStaticUser();
     const customer1Auth = ".auth/customer1.json";
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await page.getByTestId("email").fill(email);
-    await page.getByTestId("password").fill(password);
+    await page.goto("https://practicesoftwaretesting.com/auth/login"); 
+    // const emailInput = page.locator('[data-test="email"]');
+    // await emailInput.waitFor({ state: 'visible' }); 
+    // await emailInput.fill("customer@practicesoftwaretesting.com");
+    // await page.getByTestId("password").fill("welcome01");
+    // await page.getByTestId("login-submit").click();
+
+    // await expect(page.getByRole('menubar')).toContainText("Jane Doe");
+
+    await page.locator('[data-test="email"]').fill(user.email);
+    await page.getByTestId("password").fill(user.password);
     await page.getByTestId("login-submit").click();
 
-    await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
+    await expect(page.getByText(user.name)).toBeVisible();
+    //await expect(page.getByRole('menubar')).toContainText(user.name);
     await context.storageState({ path: customer1Auth });
-});
-
-setup("Create customer nr. 2", async ({ page, context }) => {
-    const email = "customer2@practicesoftwaretesting.com";
-    const password = "welcome01";
-    const customer2Auth = ".auth/customer2.json";
-
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await page.getByTestId("email").fill(email);
-    await page.getByTestId("password").fill(password);
-    await page.getByTestId("login-submit").click();
-
-    await expect(page.getByTestId("nav-menu")).toContainText("Jack Howe");
-    await context.storageState({ path: customer2Auth });
-});
-
-setup("Create customer nr. 3", async ({ page, context }) => {
-    const email = "customer3@practicesoftwaretesting.com";
-    const password = "pass123";
-    const customer3Auth = ".auth/customer3.json";
-
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await page.getByTestId("email").fill(email);
-    await page.getByTestId("password").fill(password);
-    await page.getByTestId("login-submit").click();
-
-    await expect(page.getByTestId("nav-menu")).toContainText("Bob Smith");
-    await context.storageState({ path: customer3Auth });
 });

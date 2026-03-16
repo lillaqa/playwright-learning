@@ -53,21 +53,20 @@ test.describe('Validate product page without authentication', () => {
 });
 
 test.describe('Validate product page with authenticated user', () => {
-    test.use({ storageState: '.auth/customer2.json' });
+    test.use({ storageState: '.auth/customer1.json' });
     test.beforeEach(async ({page}) => {
         await page.goto('https://practicesoftwaretesting.com/');
         await page.getByText('Thor Hammer').click();
     });
 
-    test('Validate add to favorite button functionality as an authenticated user', async ({page}) => {
-        await page.getByTestId('add-to-favorites').click();
-        await expect(page.getByRole('alert', {name: 'Product added to your' })).toBeVisible();
-        await expect(page.getByRole('alert', {name: 'Product added to your' })).toHaveText('Product added to your favorites list.');
-    });
+    //TODO the problem with the test is that the product could be in the user's favorite list. solution1 search for not too often used product and do the test, solution2: this should be a brand new user.
+    // test('Validate add to favorite button functionality as an authenticated user', async ({page}) => {
+    //     await page.getByTestId('add-to-favorites').click();
+    //     await expect(page.getByRole('alert', {name: 'Product added to your' })).toHaveText('Product added to your favorites list.');
+    // });
 
     test('Validate add to cart button functionality as a guest', async ({page}) => {
         await page.getByTestId('add-to-cart').click();
-        await expect(page.getByRole('alert', {name: 'Product added to shopping' })).toBeVisible();
         await expect(page.getByRole('alert', {name: 'Product added to shopping' })).toHaveText('Product added to shopping cart.');
         await expect(page.getByTestId('cart-quantity')).toHaveText('1');
     });

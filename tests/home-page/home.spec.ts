@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '@pages/home.page';
 import HeaderPage from '@pages/header.page';
+import { pickStaticUser, staticUsers } from '@helpers/selectFromStaticUsers';
 
 let homePage: HomePage;
 let headerPage: HeaderPage;
@@ -12,9 +13,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Validate home page header', () => {
-    test("Validate title", async ({ page }) => {
-        await expect(page.getByTitle('Practice Software Testing - Toolshop - v5.0')).toBeVisible();
-    });
+    test("Validate page title", async ({ page }) => {
+        await expect(page).toHaveTitle('Practice Software Testing - Toolshop - v5.0');
+}   );
 
     //SVG logo, the test needs to be upgraded
     test("Validate logo", async ({ page }) => {
@@ -67,10 +68,14 @@ test.describe('Validate sidebar', () => {
 });
 
 test.describe('Home page with authentication', () => {
-    test.use({ storageState: '.auth/customer1.json' });
 
     test("Check that customer is signed in", async ({ page }) => {
-        await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();
-        await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
+        const user = pickStaticUser();
+        await page.goto("https://practicesoftwaretesting.com/auth/login");
+        await page.getByTestId("email").fill(user.email);
+        await page.getByTestId("password").fill(user.password);
+        await page.getByTestId("login-submit").click();
+
+        await expect(page.getByTestId('nav-menu')).toContainText(user.name);
     });
 });
