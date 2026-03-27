@@ -76,7 +76,9 @@ test.describe('Test form validations', () => {
     await contactPage.firstNameTextbox.fill(goodInput);
     await contactPage.lastNameTextbox.fill(goodInput);
     await contactPage.emailTextbox.fill("test@test.ji");
-    //need to select a subject to make it work
+    //todo this locator and selecting could be improved. 
+    await page.click('[data-test="subject"]');
+    await page.selectOption('[data-test="subject"]', 'webmaster');
     await contactPage.messageTextbox.fill(longMessage);
     await contactPage.sendButton.click();
     await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
