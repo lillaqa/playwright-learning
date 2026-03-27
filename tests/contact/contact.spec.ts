@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ContactPage } from '@pages/contact.page';
+import { pickRandomOption } from '@helpers/contactOptions';
+import { generateRandomString } from '@helpers/randomText';
 
 let contactPage: ContactPage;
 
@@ -40,10 +42,11 @@ test.describe('Validte contact form', () => {
   });
 });
 
-test.describe('Test mandatory fields', () => {
+test.describe('Test form validations', () => {
   test.beforeEach(async ({ page }) => {
     contactPage.goto();
-  })
+  });
+
   test('Test mandatory text fields sent empty', async ({ page }) => {
     await contactPage.sendButton.click();
     await expect(contactPage.firstNameMandatory).toBeVisible();
@@ -52,7 +55,34 @@ test.describe('Test mandatory fields', () => {
     await expect(contactPage.subjectMandatory).toBeVisible();
     await expect(contactPage.messageMandatory).toBeVisible();
   });
+
+  test('Test invalid email format', async ({ page }) => {
+    const invalidEmail = generateRandomString(7);
+    await contactPage.emailTextbox.fill(invalidEmail);
+    await contactPage.sendButton.click();
+    await expect(page.getByText('Email format is invalid')).toBeVisible();
+  });
+
+  test('Too short message', async ({ page }) => {
+    const shortMessage = generateRandomString(49);
+    await contactPage.messageTextbox.fill(shortMessage);
+    await contactPage.sendButton.click();
+    await expect(page.getByText('Message must be minimal 50 characters')).toBeVisible();
+  });
+
+  test('Too long message', async ({ page }) => {
+    const longMessage = generateRandomString(251);
+    const goodInput = generateRandomString(8);
+    await contactPage.firstNameTextbox.fill(goodInput);
+    await contactPage.lastNameTextbox.fill(goodInput);
+    await contactPage.emailTextbox.fill("test@test.ji");
+    //need to select a subject to make it work
+    await contactPage.messageTextbox.fill(longMessage);
+    await contactPage.sendButton.click();
+    await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
+  });  
 });
+
 
 //WIP dropdown option tests, main issue is the locator of the dropdown list and  validating the new text
 // test.describe('Test Subject dropdown', () => {
