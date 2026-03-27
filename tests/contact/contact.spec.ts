@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { ContactPage } from '@pages/contact.page';
-import { pickRandomOption } from '@helpers/contactOptions';
 import { generateRandomString } from '@helpers/randomText';
 
 let contactPage: ContactPage;
@@ -73,7 +72,6 @@ test.describe('Test form validations', () => {
   test('Too long message', async ({ page }) => {
     const longMessage = generateRandomString(251);
     const goodInput = generateRandomString(8);
-    
     await contactPage.firstNameTextbox.fill(goodInput);
     await contactPage.lastNameTextbox.fill(goodInput);
     await contactPage.emailTextbox.fill("test@test.ji");
@@ -81,6 +79,24 @@ test.describe('Test form validations', () => {
     await contactPage.messageTextbox.fill(longMessage);
     await contactPage.sendButton.click();
     await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
+  });  
+});
+
+test.describe('Validate positive user flows', () => {
+  test.beforeEach(async ({ page }) => {
+    contactPage.goto();
+  });
+
+  test('Submit without attachment', async ({ page }) => {
+    const longMessage = generateRandomString(51);
+    const goodInput = generateRandomString(5);
+    await contactPage.firstNameTextbox.fill(goodInput);
+    await contactPage.lastNameTextbox.fill(goodInput);
+    await contactPage.emailTextbox.fill("test@test.ji");
+    contactPage.selectAnOption();
+    await contactPage.messageTextbox.fill(longMessage);
+    await contactPage.sendButton.click();
+    await expect(page.getByText("Thanks for your message! We will contact you shortly.")).toBeVisible();
   });  
 });
 
