@@ -1,4 +1,5 @@
 import { expect, Page, Locator } from '@playwright/test';
+import { pickRandomOption } from '@helpers/contactOptions';
 
 export class ContactPage {
     //variables
@@ -38,6 +39,12 @@ export class ContactPage {
     //methods
     async goto() {
         await this.page.goto('https://practicesoftwaretesting.com/contact');
+    }
+
+    async selectAnOption() {
+      const randomOption = pickRandomOption();
+      await this.page.click('[data-test="subject"]');
+      await this.page.selectOption('[data-test="subject"]', randomOption);
     }
 }
 

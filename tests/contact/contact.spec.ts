@@ -73,13 +73,11 @@ test.describe('Test form validations', () => {
   test('Too long message', async ({ page }) => {
     const longMessage = generateRandomString(251);
     const goodInput = generateRandomString(8);
-    const randomOption = pickRandomOption();
+    
     await contactPage.firstNameTextbox.fill(goodInput);
     await contactPage.lastNameTextbox.fill(goodInput);
     await contactPage.emailTextbox.fill("test@test.ji");
-    //todo this locator could be improved. 
-    await page.click('[data-test="subject"]');
-    await page.selectOption('[data-test="subject"]', randomOption);
+    contactPage.selectAnOption();
     await contactPage.messageTextbox.fill(longMessage);
     await contactPage.sendButton.click();
     await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
