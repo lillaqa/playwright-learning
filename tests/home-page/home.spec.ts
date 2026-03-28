@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '@pages/home.page';
 import HeaderPage from '@pages/header.page';
-import { pickStaticUser, staticUsers } from '@helpers/selectFromStaticUsers';
+import { pickStaticUser } from '@helpers/selectFromStaticUsers';
 
 let homePage: HomePage;
 let headerPage: HeaderPage;
