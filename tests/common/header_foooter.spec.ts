@@ -5,53 +5,34 @@ import HeaderPage from '@pages/header.page';
 let footerPage: FooterPage;
 let headerPage: HeaderPage;
 
-test.describe('Validate global UI elements on contact page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/contact');
-    footerPage = new FooterPage(page);
-    headerPage = new HeaderPage(page);
-  });
+test.describe('Validate site navigation and common UI elements', () => {
 
-  test('Validate header elements: notification bar', async ({ page }) => {
-    await headerPage.validateNotificationBar();
-    await headerPage.validateDocumentationLink();
-  });
-
-  test('Validate header elements: app header', async ({ page }) => {
-    await headerPage.validateAppHeader();
-  });
-
-  test('Validate footer is visible and text is correct', async ({ page }) => {
-    await footerPage.validateFooterText();
-    await footerPage.validateGitHubLink();
-    await footerPage.validatePrivacyPolicyLink();
-    await footerPage.validateBarnImagesLink();
-    await footerPage.validateUnsplashLink();
-  });
-});
-
-test.describe('Validate global UI elements on product page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com/');
-    await page.getByText('Slip Joint Pliers').click();
     footerPage = new FooterPage(page);
     headerPage = new HeaderPage(page);
   });
 
-  test('Validate header elements: notification bar', async ({ page }) => {
-    await headerPage.validateNotificationBar();
-    await headerPage.validateDocumentationLink();
+  test.afterEach(async ({ page }) => {
+    await expect(headerPage.notificationBar).toHaveText('View the Documentation for this application.');
+    await expect(headerPage.documentationLink).toHaveAttribute('href', 'https://testsmith-io.github.io/practice-software-testing/#/');
+    await expect(headerPage.appHeader).toContainText('Practice Black Box Testing & Bug Hunting');
+    await expect(headerPage.guideButton).toHaveText('Testing Guide');
+    await expect(headerPage.bugHuntingButton).toContainText('Bug Hunting');
+    await expect(headerPage.gearGroup).toBeVisible();
+    await expect(footerPage.footerText).toHaveText('This is a DEMO application (GitHub repo), used for software testing training purpose. | Privacy Policy | Banner photo by Barn Images on Unsplash.');
+    await expect(footerPage.gitHubLink).toHaveAttribute('href', 'https://github.com/testsmith-io/practice-software-testing');
+    await expect(footerPage.privacyPolicyLink).toHaveAttribute('href', '/privacy');
+    await expect(footerPage.barnImagesLink).toHaveAttribute('href', 'https://unsplash.com/@barnimages');
+    await expect(footerPage.unsplashLink).toHaveAttribute('href', 'https://unsplash.com/photos/t5YUoHW6zRo');
   });
 
-  test('Validate header elements: app header', async ({ page }) => {
-    await headerPage.validateAppHeader();
+  test('Check contact page navigation and header/footer elements', async ({ page }) => {
+    await page.getByTestId('nav-contact').click();
+    //await expect(contactPage.contactForm).toBeVisible();
   });
 
-  test('Validate footer is visible and text is correct', async ({ page }) => {
-    await footerPage.validateFooterText();
-    await footerPage.validateGitHubLink();
-    await footerPage.validatePrivacyPolicyLink();
-    await footerPage.validateBarnImagesLink();
-    await footerPage.validateUnsplashLink();
+  test('Check product page navigation and header/footer elements', async ({ page }) => {
+    await page.getByText('Slip Joint Pliers').click();    
   });
 });

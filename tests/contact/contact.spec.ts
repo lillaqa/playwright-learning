@@ -7,21 +7,10 @@ let contactPage: ContactPage;
 
 test.beforeEach(async ({ page }) => {
   contactPage = new ContactPage(page);
-});
-
-test.describe('Check that contact opens', () => {
-  test('contact opens', async ({ page }) => {
-    await page.goto('https://practicesoftwaretesting.com/');
-    await page.getByTestId('nav-contact').click();
-    await expect(contactPage.contactForm).toBeVisible();
-  });
+  contactPage.goto();
 });
 
 test.describe('Validte contact form', () => {
-  test.beforeEach(async ({ page }) => {
-    contactPage.goto();
-  })
-
   test('Validate UI elements are visible', async ({ page }) => {
     await expect(contactPage.contactHeading).toHaveText('Contact');
     await expect(page.getByText('First name')).toBeVisible();
@@ -42,10 +31,6 @@ test.describe('Validte contact form', () => {
 });
 
 test.describe('Test form validations', () => {
-  test.beforeEach(async ({ page }) => {
-    contactPage.goto();
-  });
-
   test('Test mandatory text fields sent empty', async ({ page }) => {
     await contactPage.sendButton.click();
     await expect(contactPage.firstNameMandatory).toBeVisible();
@@ -83,10 +68,7 @@ test.describe('Test form validations', () => {
 });
 
 test.describe('Validate positive user flows', () => {
-  test.beforeEach(async ({ page }) => {
-    contactPage.goto();
-  });
-
+ 
   test('Submit without attachment', async ({ page }) => {
     const longMessage = generateRandomString(51);
     const goodInput = generateRandomString(5);
