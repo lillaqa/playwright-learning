@@ -20,5 +20,6 @@ setup("Create customer nr. 1", async ({ page, context }) => {
 
     await expect(page.getByText(user.name)).toBeVisible();
     //await expect(page.getByRole('menubar')).toContainText(user.name);
-    await context.storageState({ path: customer1Auth });
+    //await context.storageState({ path: customer1Auth });
+    await expect(page.getByTestId('page-title')).toHaveText('My account');
 });
