@@ -63,7 +63,7 @@ test.describe('Test form validations', () => {
     await contactPage.emailTextbox.fill("test@test.ji");
     contactPage.selectAnOption();
     await contactPage.messageTextbox.fill(longMessage);
-    await contactPage.sendButton.click();
+    await contactPage.sendButton.click({ timeout: 500 });
     await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
   });  
 });
@@ -78,7 +78,7 @@ test.describe('Validate positive user flows', () => {
     await contactPage.emailTextbox.fill("test@test.ji");
     contactPage.selectAnOption();
     await contactPage.messageTextbox.fill(longMessage);
-    await contactPage.sendButton.click();
+    await contactPage.sendButton.click({ timeout: 1000 });
     await expect(page.getByText("Thanks for your message! We will contact you shortly.")).toBeVisible();
   });  
 });
