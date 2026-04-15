@@ -26,6 +26,7 @@ test.describe('Validte contact form', () => {
     await expect(contactPage.firstNameTextbox).toHaveAttribute('placeholder', 'Your first name *');
     await expect(contactPage.lastNameTextbox).toHaveAttribute('placeholder', 'Your last name *');
     await expect(contactPage.emailTextbox).toHaveAttribute('placeholder', 'Your email *');
+    //await expect(page.getByText('Select a subject *')).toBeVisible();
     //await expect(page.locator('[data-test="subject"]')).toHaveAttribute('placeholder', 'Select a subject *');
   });
 });
@@ -62,7 +63,7 @@ test.describe('Test form validations', () => {
     await contactPage.emailTextbox.fill("test@test.ji");
     contactPage.selectAnOption();
     await contactPage.messageTextbox.fill(longMessage);
-    await contactPage.sendButton.click();
+    await contactPage.sendButton.click({ timeout: 500 });
     await expect(page.getByText('The message field must not be greater than 250 characters.')).toBeVisible();
   });  
 });
@@ -77,44 +78,10 @@ test.describe('Validate positive user flows', () => {
     await contactPage.emailTextbox.fill("test@test.ji");
     contactPage.selectAnOption();
     await contactPage.messageTextbox.fill(longMessage);
-    await contactPage.sendButton.click();
+    await contactPage.sendButton.click({ timeout: 1000 });
     await expect(page.getByText("Thanks for your message! We will contact you shortly.")).toBeVisible();
   });  
 });
-
-
-//WIP dropdown option tests, main issue is the locator of the dropdown list and  validating the new text
-// test.describe('Test Subject dropdown', () => {
-
-//   test('Validate dropdown options', async ({ page }) => {
-//     const dropdown = page.locator('[data-test="subject"]');
-//     await dropdown.click();
-
-//     await expect(page.getByText('Customer service')).toBeVisible();
-//     await expect(page.getByText('Webmaster')).toBeVisible();
-//     await expect(page.getByText('Return')).toBeVisible();
-//     await expect(page.getByText('Payments')).toBeVisible();
-//     await expect(page.getByText('Warranty')).toBeVisible();
-//     await expect(page.getByText('Status of my order')).toBeVisible();
-
-//     const options = dropdown.locator('option');
-//     await expect(options).toHaveCount(6);
-//     await expect(options.nth(0)).toHaveText('Customer service');
-//     await expect(options.nth(1)).toHaveText('Webmaster');
-//     await expect(options.nth(2)).toHaveText('Return');
-//     await expect(options.nth(3)).toHaveText('Payments');
-//     await expect(options.nth(4)).toHaveText('Warranty');
-//     await expect(options.nth(5)).toHaveText('Status of my order');
-//   });
-
-//   test('Check selecting customer service option', async ({ page }) => {
-//     //await page.locator('[data-test="subject"]').click();
-//     await page.locator('[data-test="subject"]').selectOption('customer-service');
-//     //await expect(page.locator('[data-test="subject"]')).toHaveText('Customer service');
-//     await expect(page.getByText('Subject', {exact: true})).toHaveText('Customer service');
-//   });
-
-// });
 
 
 
