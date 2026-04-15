@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@pages/*": ["lib/pages/*"],
-      "@helpers/*": ["lib/helpers/*"],
-      //"@fixtures/*": ["lib/fixtures/*"],
+      "@pages/*": ["./lib/pages/*"],
+      "@helpers/*": ["./lib/helpers/*"],
+      //"@fixtures/*": ["./lib/fixtures/*"],
     }
   }
 }
