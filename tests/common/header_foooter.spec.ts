@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import FooterPage from '@pages/footer.page';
 import HeaderPage from '@pages/header.page';
+import { pickRandomCategory } from '@helpers/categoryDropdown';
 
 let footerPage: FooterPage;
 let headerPage: HeaderPage;
@@ -40,5 +41,11 @@ test.describe('Validate site navigation and common UI elements', () => {
 
   test('Check sign in page navigation and header/footer elements', async ({ page }) => {
     await page.getByTestId('nav-sign-in').click();  
+  });
+
+  test('Check category page navigation and header/footer elements', async ({ page }) => {
+    const randomCategory = pickRandomCategory();
+    await page.getByTestId('nav-categories').click();
+    await page.getByRole('link', { name: randomCategory }).click();
   });
 });
