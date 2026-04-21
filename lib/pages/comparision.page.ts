@@ -12,7 +12,7 @@ export class ComparisonPage {
     readonly removeProductButton: Locator;
    
     //constructors
-    constructor(page) {
+    constructor(page: Page) {
         this.page = page;
         this.compareButton = page.getByRole('button', { name: 'Compare' });
         this.comparisonBar = page.getByTestId('comparison-bar');

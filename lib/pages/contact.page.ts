@@ -19,7 +19,7 @@ export class ContactPage {
 
 
     //constructors
-    constructor(page) {
+    constructor(page: Page) {
         this.page = page;
         this.contactHeading = page.getByRole('heading', { name: 'Contact' });
         this.contactForm = page.locator('form');
