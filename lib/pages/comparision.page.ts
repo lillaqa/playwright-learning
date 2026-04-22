@@ -1,7 +1,7 @@
 import { expect, Page, Locator } from '@playwright/test';
 
 export class ComparisonPage {
-    //variables
+    
     readonly page: Page;
     readonly compareButton: Locator;
     readonly homeClearAllButton: Locator;
@@ -10,8 +10,7 @@ export class ComparisonPage {
     readonly clearAllButton: Locator;
     readonly showDifferencesCheckbox: Locator;
     readonly removeProductButton: Locator;
-   
-    //constructors
+
     constructor(page: Page) {
         this.page = page;
         this.compareButton = page.getByRole('button', { name: 'Compare' });
@@ -23,7 +22,6 @@ export class ComparisonPage {
         this.removeProductButton = page.getByRole('button', { name: 'Remove Product' });
     }
 
-    //methods
 
 }
 
