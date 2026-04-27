@@ -10,7 +10,7 @@ class PriceSlider {
     readonly floorLabel: Locator;
     readonly ceilLabel: Locator;
 
-    constructor(page) {
+    constructor(page: Page) {
         this.page = page;
         this.container = page.locator('.ngx-slider'); // The main wrapper
         this.minPointer = page.getByRole('slider', { name: 'ngx-slider', exact: true });
