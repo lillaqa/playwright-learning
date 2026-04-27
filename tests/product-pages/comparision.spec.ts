@@ -14,6 +14,7 @@ test.describe('Home page buttons function as expected', () => {
         await expect(comparisonPage.comparisonBar).toBeVisible();
         await expect(comparisonPage.compareNowButton).toBeVisible();
         await expect(comparisonPage.homeClearAllButton).toBeVisible();
+        await expect(page.getByText('1 product(s) selected')).toBeVisible(); 
     });
 
     test('Compare button selects the product', async ({ page }) => {
@@ -33,6 +34,13 @@ test.describe('Home page buttons function as expected', () => {
         await comparisonPage.homeClearAllButton.click();
         await expect(comparisonPage.compareButton.nth(0)).toHaveAttribute('aria-pressed', 'false');
         await expect(comparisonPage.compareButton.nth(1)).toHaveAttribute('aria-pressed', 'false');
+    });
+
+    test('Compare Now button navigates to the comparison page', async ({ page }) => {
+        await comparisonPage.compareButton.nth(0).click();
+        await comparisonPage.compareButton.nth(1).click();
+        await comparisonPage.compareNowButton.click();
+        await expect(page).toHaveURL('/comparison');
     });
 
 });

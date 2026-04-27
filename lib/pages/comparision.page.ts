@@ -16,7 +16,8 @@ export class ComparisonPage {
         this.compareButton = page.getByRole('button', { name: 'Compare' });
         this.comparisonBar = page.getByTestId('comparison-bar');
         this.homeClearAllButton = page.getByRole('button', { name: 'Clear All' });
-        this.compareNowButton = page.getByRole('button', { name: 'Compare Now' });
+        //this.compareNowButton = page.getByRole('button', { name: 'Compare Now' });
+        this.compareNowButton = page.getByTestId('compare-link');
         this.clearAllButton = page.getByRole('button', { name: 'Clear All' });
         this.showDifferencesCheckbox = page.getByTestId('show-differences');
         this.removeProductButton = page.getByRole('button', { name: 'Remove Product' });
