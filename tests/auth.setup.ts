@@ -1,7 +1,7 @@
 import { test as setup, expect } from '@playwright/test';
 import { pickStaticUser } from '@helpers/selectFromStaticUsers';
 
-setup("Create customer nr. 1", async ({ page, context }) => {
+setup('Create customer nr. 1', { tag: '@authenticated' }, async ({ page, context }) => {
     const user = pickStaticUser();
     const customer1Auth = ".auth/customer1.json";
 

@@ -41,6 +41,16 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'CI-Safe',
+      use: { ...devices['Desktop Chrome'] },
+      grepInvert: /@authorized/,
+    },
+    {
+      name: 'Local-Only',
+      use: { ...devices['Desktop Chrome'] },
+      metadata: { type: 'local' },
+    },
+    {
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
     },
