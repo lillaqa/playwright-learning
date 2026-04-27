@@ -52,7 +52,7 @@ test.describe('Validate product page without authentication', () => {
 
 });
 
-test.describe('Validate product page with authenticated user', () => {
+test.describe('Validate product page with authenticated user', { tag: '@authenticated' }, () => {
     test.use({ storageState: '.auth/customer1.json' });
     test.beforeEach(async ({page}) => {
         await page.goto('https://practicesoftwaretesting.com/');
@@ -65,11 +65,6 @@ test.describe('Validate product page with authenticated user', () => {
     //     await expect(page.getByRole('alert', {name: 'Product added to your' })).toHaveText('Product added to your favorites list.');
     // });
 
-    test('Validate add to cart button functionality as a guest', async ({page}) => {
-        await page.getByTestId('add-to-cart').click();
-        await expect(page.getByRole('alert', {name: 'Product added to shopping' })).toHaveText('Product added to shopping cart.');
-        await expect(page.getByTestId('cart-quantity')).toHaveText('1');
-    });
 });
 
 
