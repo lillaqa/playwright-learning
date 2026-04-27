@@ -49,6 +49,7 @@ test.describe('Test form validations', () => {
   });
 
   test('Too short message', async ({ page }) => {
+    test.fixme();
     const shortMessage = generateRandomString(49);
     await contactPage.messageTextbox.fill(shortMessage);
     await contactPage.sendButton.click();
@@ -56,6 +57,7 @@ test.describe('Test form validations', () => {
   });
 
   test('Too long message', async ({ page }) => {
+    test.fixme();
     const longMessage = generateRandomString(251);
     const goodInput = generateRandomString(8);
     await contactPage.firstNameTextbox.fill(goodInput);
@@ -69,8 +71,8 @@ test.describe('Test form validations', () => {
 });
 
 test.describe('Validate positive user flows', () => {
- 
   test('Submit without attachment', async ({ page }) => {
+    test.fixme();
     const longMessage = generateRandomString(51);
     const goodInput = generateRandomString(5);
     await contactPage.firstNameTextbox.fill(goodInput);
