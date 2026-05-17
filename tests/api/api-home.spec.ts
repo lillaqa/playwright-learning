@@ -1,4 +1,11 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import ApiPage from '@pages/api.page';
+
+let apiPage: ApiPage;
+
+test.beforeEach(async ({ page }) => {
+    apiPage = new ApiPage(page);
+});
 
 test.describe('GET Categories', () => {
     test('GET /categories - without authentication', async ({ request }) => {
