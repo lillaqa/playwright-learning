@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/lillaqa/playwright-learning#readme",
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.61.1",
     "@types/node": "^25.3.0"
   }
 }
