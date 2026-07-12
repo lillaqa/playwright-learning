@@ -45,9 +45,17 @@ test.describe('GET all brands', () => {
         const apiURL = 'https://api.practicesoftwaretesting.com';
         const response = await request.get(apiURL + '/brands');
         const responseBody = await response.json();
+        //const { id, name, slug } = responseBody[0];
 
         expect(response.status()).toBe(200);
         expect(responseBody).toBeInstanceOf(Array);
         expect(responseBody.length).toBeGreaterThan(0);
+        expect(responseBody).toMatchObject([
+            {
+                id: expect.any(String),
+                name: expect.any(String),
+                slug: expect.any(String)
+            }
+        ]);
     });
 });
